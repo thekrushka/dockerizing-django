@@ -1,21 +1,21 @@
 web:
   restart: always
-  build: ./web
+  build: ../uks-web
   expose:
-    - "8000"
+    - "7002"
   links:
     - postgres:postgres
     - redis:redis
   volumes:
     - /usr/src/app/static
   env_file: .env
-  command: /usr/local/bin/gunicorn docker_django.wsgi:application -w 2 -b :8000
+  command: /usr/local/bin/gunicorn docker_django.wsgi:application -w 2 -b :7002
 
 nginx:
   restart: always
   build: ./nginx/
   ports:
-    - "80:80"
+    - "8002:8002"
   volumes:
     - /www/static
   volumes_from:
